@@ -1,4 +1,4 @@
-package com.owodigi.merge;
+package com.owodigi.merge.intervals;
 
 import java.util.*;
 
