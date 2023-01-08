@@ -3,7 +3,8 @@ package com.owodigi.cyclic.sort;
 import java.util.*;
 
 /**
- * Completed but don't fully understand
+ * Status: Completed but don't fully understand
+ * We are given an unsorted array containing n numbers taken from the range 1 to n. The array has some numbers appearing twice, find all these duplicate numbers using constant space.
  */
 class FindAllDuplicate {
 
