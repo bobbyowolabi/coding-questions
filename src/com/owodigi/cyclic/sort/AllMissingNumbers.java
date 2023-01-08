@@ -2,11 +2,11 @@ package com.owodigi.cyclic.sort;
 
 import java.util.*;
 
+/**
+ * Not Completed, the sorting portion does not work.
+ */
 class AllMissingNumbers {
 
-    // { 2, 3, 1, 8, 2, 3, 5, 1 }
-    // sortedNums(size=8)
-    // sortedNums={[1] = 2}
     public static List<Integer> findNumbers(int[] nums) {
         final List<Integer> sortedNums = new ArrayList<>(nums.length);
         for (int i = 0; i < nums.length; ++i) {
