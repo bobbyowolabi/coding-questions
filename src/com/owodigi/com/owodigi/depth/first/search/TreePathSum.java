@@ -1,16 +1,5 @@
 package com.owodigi.com.owodigi.depth.first.search;
 
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-        val = x;
-    }
-};
-
 class TreePathSum {
 
     private static boolean hasPath(final int target, int sum, final TreeNode node) {
