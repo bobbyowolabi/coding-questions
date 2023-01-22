@@ -7,49 +7,26 @@ import java.util.*;
  */
 class PathWithGivenSequence {
 
-    // 111 = (10^2)*1   +   (10^1)*1    + (10^0)*1
-    //     = 100        +   10          +  1
-
-    private static int toInteger(final List<Integer> number) {
-        int value = 0;
-        for (int i = 0; i < number.size(); ++i) {
-            final int exponent = number.size() - i - 1;
-            value += (Math.pow(10, exponent) * number.get(i));
-        }
-        return value;
-    }
-
-    private static int toInteger(final int[] number) {
-        int value = 0;
-        for (int i = 0; i < number.length; ++i) {
-            final int exponent = number.length - i - 1;
-            value += (Math.pow(10, exponent) * number[i]);
-        }
-        return value;
-    }
-
     private static boolean isLeaf(final TreeNode node) {
         return node.left == null && node.right == null;
     }
 
-    private static boolean findPath(final int target, final List<Integer> path, final TreeNode node) {
-        if (node == null) {
+    private static boolean findPath(final int[] sequence, final int index, final TreeNode node) {
+        if (node == null || index >= sequence.length) {
             return false;
         }
-        path.add(node.val);
-        if (isLeaf(node)) {
-            final int candidate = toInteger(path);
-            if (target == candidate)
+        if (sequence[index] == node.val) {
+            if (isLeaf(node)) {
                 return true;
+            }
+            return findPath(sequence, index + 1, node.left) || findPath(sequence, index + 1, node.right);
+        } else {
+            return false;
         }
-        final boolean hasPath = findPath(target, path, node.left) || findPath(target, path, node.right);
-        path.remove(path.size() - 1);
-        return hasPath;
     }
 
     public static boolean findPath(final TreeNode root, final int[] sequence) {
-        final int target = toInteger(sequence);
-        return findPath(target, new ArrayList<>(), root);
+        return findPath(sequence, 0, root);
     }
 
     public static void main(String[] args) {
