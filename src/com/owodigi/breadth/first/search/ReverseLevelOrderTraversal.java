@@ -2,18 +2,21 @@ package com.owodigi.breadth.first.search;
 
 import java.util.*;
 
-
 /**
- * Given a binary tree, populate an array to represent its level-by-level traversal. You should populate the values of
- * all nodes of each level from left to right in separate sub-arrays.
+ * Title: Reverse Level Order Traversal (easy)
+ * Status: SOLVED
+ * Source: https://www.educative.io/courses/grokking-the-coding-interview/m2N6GwARL8r
+ * Problem Statement: Given a binary tree, populate an array to represent its level-by-level traversal in reverse
+ * order, i.e., the lowest level comes first. You should populate the values of all nodes in each level from left to
+ * right in separate sub-arrays.
  */
-class LevelOrderTraversal {
-    public static List<List<Integer>> traverse(TreeNode root) {
-        final List<List<Integer>> result = new ArrayList<List<Integer>>();
+class ReverseLevelOrderTraversal {
+
+    public static List<List<Integer>> traverse(final TreeNode root) {
+        final List<List<Integer>> result = new LinkedList<List<Integer>>();
         final Queue<TreeNode> toVisit = new ArrayDeque<>();
         toVisit.add(root);
         while (toVisit.isEmpty() == false) {
-            final int size = toVisit.size();
             final List<Integer> level = new ArrayList<>();
             final List<TreeNode> nextLevel = new ArrayList<>();
             for (final TreeNode node : toVisit) {
@@ -25,9 +28,9 @@ class LevelOrderTraversal {
                     nextLevel.add(node.right);
                 }
             }
-            result.add(level);
             toVisit.clear();
             toVisit.addAll(nextLevel);
+            result.add(0, level);
         }
         return result;
     }
@@ -39,7 +42,7 @@ class LevelOrderTraversal {
         root.left.left = new TreeNode(9);
         root.right.left = new TreeNode(10);
         root.right.right = new TreeNode(5);
-        List<List<Integer>> result = LevelOrderTraversal.traverse(root);
-        System.out.println("Level order traversal: " + result);
+        List<List<Integer>> result = ReverseLevelOrderTraversal.traverse(root);
+        System.out.println("Reverse level order traversal: " + result);
     }
 }
