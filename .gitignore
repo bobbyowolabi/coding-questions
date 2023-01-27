@@ -6,5 +6,8 @@ out/
 lib/
 *.iml
 
+### Maven ###
+target
+
 ### Mac OS ###
 .DS_Store
