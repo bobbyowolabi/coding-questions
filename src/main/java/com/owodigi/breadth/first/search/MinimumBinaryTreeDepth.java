@@ -1,5 +1,6 @@
 package com.owodigi.breadth.first.search;
 
+import com.owodigi.util.TreeNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

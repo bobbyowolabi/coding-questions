@@ -3,14 +3,14 @@ package com.owodigi.util;
 import java.util. * ;
 
 class BinaryTree{
-    public BinaryTreeNode root;
+    public Node root;
 
     public BinaryTree() {
         this.root = null;
     }
 
     public BinaryTree(Integer nodeData) {
-        this.root = new BinaryTreeNode(nodeData);
+        this.root = new Node(nodeData);
     }
 
     public BinaryTree(List<Integer> nodeDataList) {
@@ -21,12 +21,12 @@ class BinaryTree{
     }
     // for BST insertion
     public void insert(int nodeData) {
-        BinaryTreeNode newNode = new BinaryTreeNode(nodeData);
+        Node newNode = new Node(nodeData);
         if (this.root == null) {
             this.root = newNode;
         } else {
-            BinaryTreeNode parent = null;
-            BinaryTreeNode tempNode = this.root;
+            Node parent = null;
+            Node tempNode = this.root;
             while (tempNode != null) {
                 parent = tempNode;
                 if (nodeData <= tempNode.data) {
@@ -42,7 +42,7 @@ class BinaryTree{
             }
         }
     }
-    private BinaryTreeNode findInBSTRec(BinaryTreeNode node, int nodeData) {
+    private Node findInBSTRec(Node node, int nodeData) {
         if (node == null)
             return null;
 
@@ -54,19 +54,19 @@ class BinaryTree{
             return findInBSTRec(node.right, nodeData);
         }
     }
-    public BinaryTreeNode findInBST(int nodeData) {
+    public Node findInBST(int nodeData) {
         return findInBSTRec(this.root, nodeData);
     }
-    public int getSubTreeNodeCount(BinaryTreeNode node) {
+    public int getSubTreeNodeCount(Node node) {
         if (node == null) {
             return 0;
         } else {
             return 1 + getSubTreeNodeCount(node.left) + getSubTreeNodeCount(node.right);
         }
     }
-    private BinaryTreeNode getTreeDeepCopyRec(BinaryTreeNode node) {
+    private Node getTreeDeepCopyRec(Node node) {
         if (node != null) {
-            BinaryTreeNode newNode = new BinaryTreeNode(node.data);
+            Node newNode = new Node(node.data);
             newNode.left = getTreeDeepCopyRec(node.left);
             newNode.right = getTreeDeepCopyRec(node.right);
             return newNode;

@@ -1,4 +1,4 @@
-package com.owodigi.com.owodigi.depth.first.search;
+package com.owodigi.depth.first.search;
 
 /**
  * Title:

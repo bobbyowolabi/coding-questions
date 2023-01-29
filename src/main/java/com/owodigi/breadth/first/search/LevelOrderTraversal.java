@@ -1,5 +1,7 @@
 package com.owodigi.breadth.first.search;
 
+import com.owodigi.util.TreeNode;
+
 import java.util.*;
 
 

@@ -1,6 +1,6 @@
-package com.owodigi.com.owodigi.depth.first.search;
+package com.owodigi.depth.first.search;
 
-import java.util.*;
+import com.owodigi.util.TreeNode;
 
 /**
  * Given a binary tree and a number sequence, find if the sequence is present as a root-to-leaf path in the given tree.
