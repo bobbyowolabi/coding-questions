@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * TITLE: Flatten Binary Tree to Linked List
+ * LEVEL: Medium
  * STATUS: NOT SOLVED ❌
  * PROBLEM STATEMENT: Given the root of a binary tree, flatten the tree into a linked list.  That is, using the same
  * Node class, have all the left pointers, point to NULL and all right pointers point to the next node in preorder.
@@ -64,7 +65,7 @@ public class FlattenTree {
      *             6
      */
     @Test
-    public void sampleData1() {
+    public void testCase1() {
         final Node expected = new Node(1);
         expected.right = new Node(2);
         expected.right.right = new Node(3);
