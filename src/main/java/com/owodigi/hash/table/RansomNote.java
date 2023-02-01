@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * SAMPLE DATA:
  * Input: ransomNote = "a", magazine = "b"
  */
-public class RansomeNote {
+public class RansomNote {
 
     public boolean canConstruct(String ransomNote, String magazine) {
         final Map<Character, Integer> frequencies = new HashMap<>();
@@ -45,7 +45,7 @@ public class RansomeNote {
         final String note = "a";
         final String magazine = "b";
         final boolean expected = false;
-        final boolean actual = new RansomeNote().canConstruct(note, magazine);
+        final boolean actual = new RansomNote().canConstruct(note, magazine);
         Assertions.assertEquals(expected, actual, "Can construct '" + note + "' with magazine '" + magazine + "'");
     }
 
@@ -54,7 +54,7 @@ public class RansomeNote {
         final String note = "aa";
         final String magazine = "ab";
         final boolean expected = false;
-        final boolean actual = new RansomeNote().canConstruct(note, magazine);
+        final boolean actual = new RansomNote().canConstruct(note, magazine);
         Assertions.assertEquals(expected, actual, "Can construct '" + note + "' with magazine '" + magazine + "'");
     }
 
@@ -63,7 +63,7 @@ public class RansomeNote {
         final String note = "aa";
         final String magazine = "aab";
         final boolean expected = true;
-        final boolean actual = new RansomeNote().canConstruct(note, magazine);
+        final boolean actual = new RansomNote().canConstruct(note, magazine);
         Assertions.assertEquals(expected, actual, "Can construct '" + note + "' with magazine '" + magazine + "'");
     }
 
@@ -72,7 +72,7 @@ public class RansomeNote {
         final String note = "aa";
         final String magazine = "";
         final boolean expected = false;
-        final boolean actual = new RansomeNote().canConstruct(note, magazine);
+        final boolean actual = new RansomNote().canConstruct(note, magazine);
         Assertions.assertEquals(expected, actual, "Can construct '" + note + "' with magazine '" + magazine + "'");
     }
 }
