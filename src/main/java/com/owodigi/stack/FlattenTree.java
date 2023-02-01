@@ -1,4 +1,4 @@
-package com.owodigi.depth.first.search;
+package com.owodigi.stack;
 
 import com.owodigi.util.Assert;
 import com.owodigi.util.Node;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * TITLE: Flatten Binary Tree to Linked List
  * LEVEL: Medium
- * STATUS: SOLVED ✅
+ * STATUS: NOT SOLVED ❌
  * PROBLEM STATEMENT: Given the root of a binary tree, flatten the tree into a linked list.  That is, using the same
  * Node class, have all the left pointers, point to NULL and all right pointers point to the next node in preorder.
  * SAMPLE DATA:
@@ -22,22 +22,8 @@ import org.junit.jupiter.api.Test;
 public class FlattenTree {
 
     public static Node flatten(final Node node) {
-        if (node == null || (node.left == null && node.right == null)) {
-            return node;
-        }
-        if (node.left != null) {
-            flatten(node.left);
-            final Node temp = node.right;
-            node.right = node.left;
-            node.left = null;
-            Node current = node.right;
-            while (current.right != null) {
-                current = current.right;
-            }
-            current.right = temp;
-        }
-        flatten(node.right);
-        return node;
+        // Enter code
+       return node;
     }
 
     /**
