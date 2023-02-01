@@ -28,11 +28,12 @@ class RootPathSums {
         return node.left == null && node.right == null;
     }
 
-    private void pathSum(final int sum, final int targetSum, final List<Integer> path, final List<List<Integer>> result, final TreeNode node) {
+    private void pathSum(int sum, final int targetSum, final List<Integer> path, final List<List<Integer>> result, final TreeNode node) {
         if (node == null) {
             return;
         }
         path.add(node.val);
+        sum += node.val;
         if (isLeaf(node)) {
             if (sum == targetSum) {
                 result.add(new ArrayList<>(path));
@@ -40,8 +41,8 @@ class RootPathSums {
                 return;
             }
         }
-        pathSum(sum + node.val, targetSum, path, result, node.left);
-        pathSum(sum + node.val, targetSum, path, result, node.right);
+        pathSum(sum, targetSum, path, result, node.left);
+        pathSum(sum, targetSum, path, result, node.right);
         path.remove(path.size() - 1);
     }
 
@@ -73,8 +74,62 @@ class RootPathSums {
         input.right.right = new TreeNode(4);
         input.right.right.left = new TreeNode(5);
         input.right.right.right = new TreeNode(1);
+        final int target = 22;
         final List<List<Integer>> expected = Arrays.asList(Arrays.asList(5,4,11,2), Arrays.asList(5,8,4,5));
-        final List<List<Integer>> actual = new RootPathSums().pathSum(input, 22);
+        final List<List<Integer>> actual = new RootPathSums().pathSum(input, target);
+        Assertions.assertEquals(expected, actual, "root path sum");
+    }
+
+    @Test
+    public void testCase2() {
+        final TreeNode input = new TreeNode(1);
+        input.left = new TreeNode(2);
+        input.right = new TreeNode(3);
+        final int target = 5;
+        final List<List<Integer>> expected = Arrays.asList();
+        final List<List<Integer>> actual = new RootPathSums().pathSum(input, target);
+        Assertions.assertEquals(expected, actual, "root path sum");
+    }
+
+    @Test
+    public void testCase3() {
+        final TreeNode input = new TreeNode(1);
+        input.left = new TreeNode(2);
+        input.right = new TreeNode(3);
+        final int target = 3;
+        final List<List<Integer>> expected = Arrays.asList(Arrays.asList(1,2));
+        final List<List<Integer>> actual = new RootPathSums().pathSum(input, target);
+        Assertions.assertEquals(expected, actual, "root path sum");
+    }
+
+    @Test
+    public void testCase4() {
+        final TreeNode input = new TreeNode(1);
+        input.left = new TreeNode(2);
+        input.right = new TreeNode(3);
+        final int target = 4;
+        final List<List<Integer>> expected = Arrays.asList(Arrays.asList(1,3));
+        final List<List<Integer>> actual = new RootPathSums().pathSum(input, target);
+        Assertions.assertEquals(expected, actual, "root path sum");
+    }
+
+    @Test
+    public void testCase5() {
+        final TreeNode input = new TreeNode(1);
+        input.left = new TreeNode(2);
+        final int target = 0;
+        final List<List<Integer>> expected = Arrays.asList();
+        final List<List<Integer>> actual = new RootPathSums().pathSum(input, target);
+        Assertions.assertEquals(expected, actual, "root path sum");
+    }
+
+    @Test
+    public void testCase6() {
+        final TreeNode input = new TreeNode(1);
+        input.left = new TreeNode(2);
+        final int target = 3;
+        final List<List<Integer>> expected = Arrays.asList(Arrays.asList(1,2));
+        final List<List<Integer>> actual = new RootPathSums().pathSum(input, target);
         Assertions.assertEquals(expected, actual, "root path sum");
     }
 }
