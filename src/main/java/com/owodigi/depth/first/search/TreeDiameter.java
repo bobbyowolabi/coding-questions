@@ -1,57 +1,112 @@
 package com.owodigi.depth.first.search;
 
 import com.owodigi.util.TreeNode;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
- * Given Solution
+ * TITLE: Diameter of Binary Tree
+ * LEVEL: Easy
+ * STATUS: SOLVED ✅
+ * PROBLEM STATEMENT: Given the root of a binary tree, return the length of the diameter of the tree.  The diameter of
+ * a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass
+ * through the root.  The length of a path between two nodes is represented by the number of edges between them.
+ * SAMPLE DATA:
+ *               1
+ *       ┌───────┴───────┐
+ *       2               9
+ *   ┌───┴───┐       ┌───┴───┐
+ *   3       4       10      11
+ * ┌─┴─┐   ┌─┴─┐   ┌─┴─┐   ┌─┴─┐
+ * 5   6   7   8   12  13  14  15
  */
 class TreeDiameter {
+    private int max;
 
-    private static int treeDiameter = 0;
-
-    public static int findDiameter(TreeNode root) {
-        calculateHeight(root);
-        return treeDiameter;
-    }
-
-    private static int calculateHeight(TreeNode currentNode) {
-        if (currentNode == null)
+    private int height(final TreeNode node) {
+        if (node == null) {
             return 0;
-
-        int leftTreeHeight = calculateHeight(currentNode.left);
-        int rightTreeHeight = calculateHeight(currentNode.right);
-
-        // if the current node doesn't have a left or right subtree, we can't have
-        // a path passing through it, since we need a leaf node on each side
-        if (leftTreeHeight != 0 && rightTreeHeight != 0) {
-
-            // diameter at the current node will be equal to the height of left subtree +
-            // the height of right sub-trees + '1' for the current node
-            int diameter = leftTreeHeight + rightTreeHeight + 1;
-
-            // update the global tree diameter
-            treeDiameter = Math.max(treeDiameter, diameter);
         }
-
-        // height of the current node will be equal to the maximum of the heights of
-        // left or right subtrees plus '1' for the current node
-        return Math.max(leftTreeHeight, rightTreeHeight) + 1;
+        return 1 + Math.max(height(node.left), height(node.right));
     }
 
-    public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        root.left.left = new TreeNode(4);
-        root.right.left = new TreeNode(5);
-        root.right.right = new TreeNode(6);
-        System.out.println("Tree Diameter: " + TreeDiameter.findDiameter(root));
-        root.left.left = null;
-        root.right.left.left = new TreeNode(7);
-        root.right.left.right = new TreeNode(8);
-        root.right.right.left = new TreeNode(9);
-        root.right.left.right.left = new TreeNode(10);
-        root.right.right.left.left = new TreeNode(11);
-        System.out.println("Tree Diameter: " + TreeDiameter.findDiameter(root));
+    private int diameter(final TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        final int leftHeight = height(node.left);
+        final int rightHeight = height(node.right);
+        final int diameter = leftHeight + rightHeight;
+        max = Math.max(max, diameter);
+        diameter(node.left);
+        diameter(node.right);
+        return max;
+    }
+
+    public int diameterOfBinaryTree(final TreeNode node) {
+        max = 0;
+        diameter(node);
+        return max;
+    }
+
+    /**
+     * Input:
+     *               1
+     *       ┌───────┴───────┐
+     *       2               3
+     *   ┌───┴           ┌───┴───┐
+     *   4               5       6
+     */
+    @Test
+    public void testCase1() {
+        TreeNode input = new TreeNode(1);
+        input.left = new TreeNode(2);
+        input.right = new TreeNode(3);
+        input.left.left = new TreeNode(4);
+        input.right.left = new TreeNode(5);
+        input.right.right = new TreeNode(6);
+        final int expected = 4;
+        final int actual = new TreeDiameter().diameterOfBinaryTree(input);
+        Assertions.assertEquals(expected, actual, "diameter of binary tree");
+    }
+
+    /**
+     *               1
+     *       ┌───────┴───────┐
+     */
+    @Test
+    public void testCase2() {
+        TreeNode input = new TreeNode(1);
+        final int expected = 0;
+        final int actual = new TreeDiameter().diameterOfBinaryTree(input);
+        Assertions.assertEquals(expected, actual, "diameter of binary tree");
+    }
+
+    /**
+     * Input:
+     *               1
+     *       ┌───────┴───────┐
+     *       2               3
+     *                   ┌───┴───┐
+     *                   4       5
+     *                 ┌─┴       ┴─┐
+     *                 6           7
+     *               ┌─┴           ┴─┐
+     *               8               9
+     */
+    @Test
+    public void testCase3() {
+        TreeNode input = new TreeNode(1);
+        input.left = new TreeNode(2);
+        input.right = new TreeNode(3);
+        input.right.left = new TreeNode(4);
+        input.right.left.left = new TreeNode(6);
+        input.right.left.left.left = new TreeNode(8);
+        input.right.right = new TreeNode(5);
+        input.right.right.right = new TreeNode(7);
+        input.right.right.right.right = new TreeNode(9);
+        final int expected = 6;
+        final int actual = new TreeDiameter().diameterOfBinaryTree(input);
+        Assertions.assertEquals(expected, actual, "diameter of binary tree");
     }
 }
