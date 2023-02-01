@@ -25,22 +25,21 @@ public class FlattenTree {
         return node.left == null && node.right == null;
     }
 
-    public static void flatten(final Node node) {
-        if (node == null || isLeaf(node)) {
-            return;
+    public static Node flatten(final Node node) {
+        if (node == null || isLeaf(node))  {
+            return node;
         }
         if (node.left != null) {
             flatten(node.left);
-            final Node temp = node.right;
-            node.right = node.left;
-            node.left = null;
-            Node current = node.right;
-            while (current.right != null) {
-                current = current.right;
-            }
-            current.right = temp;
         }
-        flatten(node.right);
+        final Node temp = node.right;
+        node.right = node.left;
+        node.left = null;
+        if (node.right != null) {
+            node.right.right = temp;
+        }
+        flatten(node.right.right);
+        return node;
     }
 
     /**
