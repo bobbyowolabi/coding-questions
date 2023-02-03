@@ -30,8 +30,4 @@ public class FibonacciNumber extends Fibonacci {
     public int fib(int n) {
         return fib(n, new int[n + 1]);
     }
-
-    @Test
-    public void sampleData1() {
-    }
 }
