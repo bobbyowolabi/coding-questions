@@ -58,7 +58,7 @@ public class TwoSum {
     }
 
     @Test
-    public void testCase3() {
+    public void testCase3   () {
         final int[] input = {3,3};
         final int target = 6;
         final int[] expected = {0,1};
