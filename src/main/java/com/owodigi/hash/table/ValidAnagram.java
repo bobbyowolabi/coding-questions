@@ -61,5 +61,10 @@ public class ValidAnagram {
 
     @Test
     public void testCase1() {
+        final String a = "anagram";
+        final String b = "nagaram";
+        final boolean expected = true;
+        final boolean actual = isAnagram(a, b);
+        Assertions.assertEquals(expected, actual, "Is Valid Anagram?");
     }
 }
