@@ -24,34 +24,49 @@ public class FloodFill {
         }
     }
 
-    private boolean inBounds(final int x, final int y, int[][] image) {
-        if (y < image.length) {
-            final int[] row = image[y];
-            if (x < row.length) {
+    private boolean inBounds(final Point point, int[][] image) {
+        if (point.y >= 0 && point.y < image.length) {
+            final int[] row = image[point.y];
+            if (point.x >= 0 && point.x < row.length) {
                 return true;
             }
         }
         return false;
     }
 
+    private int getColor(final Point point, final int[][] image) {
+        return image[point.y][point.x];
+    }
+
+    private void setColor(final Point point, final int color, final int[][] image) {
+        image[point.y][point.x] = color;
+    }
+
+    private void addToVisit(final Point point, final int startingColor, final int fillColor, final int[][] image, final Queue<Point> toVisit) {
+        if (inBounds(point, image)) {
+            final int pixelColor = getColor(point, image);
+            if (pixelColor == startingColor && pixelColor != fillColor) {
+                toVisit.add(point);
+            }
+        }
+    }
+
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         final Queue<Point> toVisit = new ArrayDeque<>();
-        toVisit.add(new Point(sr, sc));
+        final Point start = new Point(sr, sc);
+        final int startColor = getColor(start, image);
+        addToVisit(start, startColor, color, image, toVisit);
         while (toVisit.isEmpty() == false) {
             final Point next = toVisit.poll();
-            final int nextColor = image[next.x][next.y];
-            if (nextColor != color) {
-                image[next.x][next.y] = color;
-                if (inBounds(next.x, next.y + 1, image)) {
-                    toVisit.add(new Point(next.x, next.y + 1));
-                } else if (inBounds(next.x + 1, next.y, image)) {
-                    toVisit.add(new Point(next.x + 1, next.y));
-                } else if (inBounds(next.x, next.y - 1, image)) {
-                    toVisit.add(new Point(next.x, next.y - 1));
-                } else if (inBounds(next.x - 1, next.y, image)) {
-                    toVisit.add(new Point(next.x - 1, next.y));
-                }
-            }
+            setColor(next, color, image);
+            final Point up = new Point(next.x, next.y + 1);
+            final Point right = new Point(next.x + 1, next.y);
+            final Point down = new Point(next.x, next.y + 1);
+            final Point left = new Point(next.x - 1, next.y);
+            addToVisit(up, startColor, color, image, toVisit);
+            addToVisit(right, startColor, color, image, toVisit);
+            addToVisit(down, startColor, color, image, toVisit);
+            addToVisit(left, startColor, color, image, toVisit);
         }
         return image;
     }
