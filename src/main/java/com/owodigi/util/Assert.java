@@ -3,6 +3,7 @@ package com.owodigi.util;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.stream.Collectors;
@@ -38,5 +39,14 @@ public class Assert {
         final Deque<String> stack = new ArrayDeque<>();
         stack.push("root");
         assertEquals(expected, actual, stack);
+    }
+
+    public static void assertEquals(final int[][] expected, final int[][] actual) {
+        for (int i = 0; i < expected.length; ++i) {
+            final int[] expectedRow = expected[i];
+            final int[] actualRow = actual[i];
+            final String message = "row " + i + ": expected " + Arrays.toString(expectedRow) + " actual " + Arrays.toString(actualRow);
+            Assertions.assertArrayEquals(expectedRow, actualRow, message);
+        }
     }
 }

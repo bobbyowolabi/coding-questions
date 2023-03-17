@@ -2,6 +2,7 @@ package com.owodigi.breadth.first.search;
 
 import java.util.*;
 
+import com.owodigi.util.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -63,11 +64,6 @@ public class FloodFill {
         final int sc = 1;
         final int color = 2;
         final int[][] actual = floodFill(input, sr, sc, color);
-        for (int i = 0; i < expected.length; ++i) {
-            final int[] expectedRow = expected[i];
-            final int[] actualRow = actual[i];
-            final String message = "row " + i + ": expected " + Arrays.toString(expectedRow) + " actual " + Arrays.toString(actualRow);
-            Assertions.assertArrayEquals(expectedRow, actualRow, message);
-        }
+        Assert.assertEquals(expected, actual);
     }
 }
