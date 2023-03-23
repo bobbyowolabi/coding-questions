@@ -36,7 +36,7 @@ public class BinaryTreeInorderTraversal extends InorderTraversal {
         visitLeft(TreeNode, stack);
         while (stack.isEmpty() == false) {
             final TreeNode next = stack.pop();
-            result.add(next.data);
+            result.add(next.val);
             if (next.right != null) {
                 stack.add(next.right);
                 visitLeft(next.right, stack);
