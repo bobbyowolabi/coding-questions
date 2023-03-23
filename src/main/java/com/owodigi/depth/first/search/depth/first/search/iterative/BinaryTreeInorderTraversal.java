@@ -3,7 +3,7 @@ package com.owodigi.depth.first.search.depth.first.search.iterative;
 import java.util.*;
 
 import com.owodigi.depth.first.search.depth.first.search.InorderTraversal;
-import com.owodigi.util.Node;
+import com.owodigi.util.TreeNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * TITLE:
  * LEVEL:
  * STATUS: SOLVED ✅ | NOT SOLVED ❌
- * PROBLEM STATEMENT: Given the root of a binary tree, return the inorder traversal of its nodes' values.
+ * PROBLEM STATEMENT: Given the root of a binary tree, return the inorder traversal of its TreeNodes' values.
  * SAMPLE DATA:
  * Input: [27,10,35,5,15,null,43]
  *                     27
@@ -23,29 +23,32 @@ import org.junit.jupiter.api.Test;
  */
 public class BinaryTreeInorderTraversal extends InorderTraversal {
 
-    private void visitLeft(Node node, final Stack<Node> stack) {
-        if (node == null)
-            return;
-        while (node.left != null) {
-            stack.push(node.left);
-            node = node.left;
+    private void visitLeft(TreeNode TreeNode, final Stack<TreeNode> stack) {
+        while (TreeNode.left != null) {
+            stack.push(TreeNode.left);
+            TreeNode = TreeNode.left;
         }
     }
 
-    private void inorderTraversal(final Node node, final List<Integer> result) {
-        final Stack<Node> stack = new Stack<>();
-        stack.push(node);
+    private void inorderTraversal(final TreeNode TreeNode, final List<Integer> result) {
+        final Stack<TreeNode> stack = new Stack<>();
+        stack.push(TreeNode);
+        visitLeft(TreeNode, stack);
         while (stack.isEmpty() == false) {
-            visitLeft(node, stack);
-            final Node current = stack.pop();
-            result.add(current.data);
-            visitLeft(current.right, stack);
+            final TreeNode next = stack.pop();
+            result.add(next.data);
+            if (next.right != null) {
+                stack.add(next.right);
+                visitLeft(next.right, stack);
+            }
         }
     }
 
-    public List<Integer> inorderTraversal(Node root) {
+    public List<Integer> inorderTraversal(TreeNode root) {
         final List<Integer> result = new ArrayList<>();
-        inorderTraversal(root, result);
+        if (root != null) {
+            inorderTraversal(root, result);
+        }
         return result;
     }
 }
