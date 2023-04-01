@@ -1,13 +1,9 @@
-package com.owodigi.depth.first.search.depth.first.search.recursive;
+package com.owodigi.depth.first.search.recursive;
 
 import java.util.*;
 
-import com.owodigi.depth.first.search.depth.first.search.InorderTraversal;
-import com.owodigi.util.Assert;
-import com.owodigi.util.Node;
+import com.owodigi.depth.first.search.InorderTraversal;
 import com.owodigi.util.TreeNode;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 /**
  * TITLE:

@@ -1,4 +1,4 @@
-package com.owodigi.depth.first.search.depth.first.search;
+package com.owodigi.depth.first.search;
 
 import java.util.*;
 
