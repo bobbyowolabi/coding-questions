@@ -1,4 +1,4 @@
-package com.owodigi.linkedlist.reversal;
+package com.owodigi.linked.list.reversal;
 
 public class ReverseLinkedList {
     public static LinkedListNode reverse(final LinkedListNode originalHead) {

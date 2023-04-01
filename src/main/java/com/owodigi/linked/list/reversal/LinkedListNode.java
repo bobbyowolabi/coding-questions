@@ -1,4 +1,4 @@
-package com.owodigi.linkedlist.reversal;// Template for linked list node class
+package com.owodigi.linked.list.reversal;// Template for linked list node class
 
 class LinkedListNode {
     public int data;

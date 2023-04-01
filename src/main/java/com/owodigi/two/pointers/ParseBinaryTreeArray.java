@@ -21,27 +21,22 @@ public class ParseBinaryTreeArray {
         root.right = right == null ? null : new Node(right);
     }
 
-    public void parse(final Node root, final Integer left, final Integer right, final int pos, final Integer[] tree) {
-        set(root, left, right);
-        set(root.left, tree[pos + 3], tree[pos + 4]);
-        set(root.right, tree[pos + 3], tree[pos + 4]);
-//        parse
-        parse(root.left, tree[pos + 3], tree[pos + 4], pos + 1, tree);
-        parse(root.right, tree[pos + 3], tree[pos + 4], pos + 1, tree);
+    public void parse(final int rootPosition, final Node root, final int childrenPosition, final Integer[] tree) {
+//        if (childrenPosition >= tree.length) {
+//            return;
+//        }
+//        set(root, tree[childrenPosition], tree[childrenPosition + 1]);
+//        parse(root.left, tree[pos + 3], tree[pos + 4], pos + 1, tree);
+//        parse(root.right, tree[pos + 3], tree[pos + 4], pos + 1, tree);
     }
 
-
-
     public Node parse(final Integer[] tree) {
-        if (tree == null) {
+        if (tree == null || tree.length == 0) {
             return null;
         }
-
-        for (int root = 0, child = root + 1; root < tree.length - 2; ++root) {
-
-
-        }
-        throw new UnsupportedOperationException();
+        final Node root = new Node(tree[0]);
+//        parse(root, );
+        return root;
     }
 
     @Test

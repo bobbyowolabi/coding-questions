@@ -1,4 +1,4 @@
-package com.owodigi.linkedlist.recursion;
+package com.owodigi.linked.list.recursion;
 
 import java.util.*;
 
