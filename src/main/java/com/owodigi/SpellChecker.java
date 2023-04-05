@@ -24,17 +24,90 @@ import org.junit.jupiter.api.Test;
  * SPACE COMPLEXITY: TBD
  */
 public class SpellChecker {
+    private TrieNode root = new TrieNode();
+
+    class TrieNode {
+        String value;
+        boolean isWord;
+        Map<Character, TrieNode> children = new HashMap<>();
+
+        public TrieNode() {
+            this.value = null;
+            isWord = false;
+        }
+
+        public TrieNode (final String value, final boolean isWord) {
+            this.value =  value;
+            this.isWord = isWord;
+        }
+    }
+
+    private void insert(final String word) {
+        TrieNode node = root;
+        for (int i = 0; i < word.length(); ++i) {
+            final char letter = word.charAt(i);
+            TrieNode child = node.children.get(letter);
+            if (child == null) {
+                child = new TrieNode(String.valueOf(letter), false);
+                node.children.put(letter, child);
+            }
+            node = child;
+        }
+        node.isWord = true;
+        node.value = word;
+    }
+
+    private void words(final TrieNode node, final List<String> result) {
+        for (final TrieNode child : node.children.values()) {
+            if (child.isWord) {
+                result.add(child.value);
+            }
+            words(child, result);
+        }
+    }
 
     public SpellChecker(final String[] dictionary) {
-        throw new UnsupportedOperationException("Implement Me!");
+        for (final String word : dictionary) {
+            insert(word);
+        }
     }
 
+    /**
+     * Checks if the specified word is spelled correctly. If it is, returns the word. If it is not, returns
+     * the first suggestion found in the dictionary.
+     *
+     * @param word
+     * @return
+     */
     public String check(final String word) {
-        throw new UnsupportedOperationException("Implement Me!");
+        final String[] suggestions = suggest(word);
+        return suggestions.length == 0 ? null : suggestions[0];
     }
 
+    /**
+     * Returns a list of suggestions for the specified misspelled word. Suggestions should be sorted by the
+     * number of characters that match the misspelled word.
+     *
+     * @param word
+     * @return
+     */
     public String[] suggest(final String word) {
-        throw new UnsupportedOperationException("Implement Me!");
+        TrieNode node = root;
+        final List<String> suggestions = new ArrayList<>();
+        for (int i = 0; i < word.length(); ++i) {
+            final char letter = word.charAt(i);
+            TrieNode child = node.children.get(letter);
+            if (child == null) {
+                words(node, suggestions);
+                final String[] result = new String[suggestions.size()];
+                return suggestions.toArray(result);
+            }
+            if (child.isWord) {
+                suggestions.add(child.value);
+            }
+            node = child;
+        }
+        return new String[]{word};
     }
 }
 
@@ -84,7 +157,7 @@ class TestSuite {
 
     private void suggestTest(final String input, final String[] expected) {
         final String[] actual = SPELL_CHECKER.suggest(input);
-        Assertions.assertArrayEquals(expected, actual, "list of suggestions for the specified misspelled word");
+        Assertions.assertArrayEquals(expected, actual, "Misspelled word suggestions for " + input + "; expected: " + Arrays.toString(expected) + "; actual: " + Arrays.toString(actual));
     }
 
     @Test
