@@ -19,9 +19,10 @@ import org.junit.jupiter.api.Test;
  *  SpellChecker spellChecker = new SpellChecker(dictionary);
  *  spellChecker.check("helo") // "hello"
  * -------------------
- * STATUS: SOLVED ✅ | NOT SOLVED ❌
- * RUNTIME COMPLEXITY: TBD
- * SPACE COMPLEXITY: TBD
+ * STATUS: SOLVED ✅
+ * RUNTIME COMPLEXITY: O(n)
+ * SPACE COMPLEXITY: O(n)
+ * NOTES: where n is the number of words in the dictionary
  */
 public class SpellChecker {
     private TrieNode root = new TrieNode();
