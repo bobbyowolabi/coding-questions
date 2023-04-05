@@ -1,9 +1,9 @@
-package com.owodigi.sorting;
-
-import java.util.*;
+package com.owodigi.sorting.in.place;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 /**
  * TITLE: Merge Sort
@@ -69,7 +69,6 @@ public class MergeSort {
         final int[] expected = {};
         test(input, expected);
     }
-
 
     @Test
     public void testCase6() {
