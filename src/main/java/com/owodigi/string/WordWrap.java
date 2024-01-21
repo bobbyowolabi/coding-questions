@@ -150,41 +150,41 @@ n = number of words OR total characters
     @Test
     public void testCase1() {
     }
+}
 
-    class WordProcessor {
+class WordProcessor {
 
-        public static List<String> wrapLines(final String[] words, final int length) {
-            final List<String> result = new ArrayList<>();
-            int lineLength = 0;
-            final StringBuilder line = new StringBuilder();
-            int wordCount = 0;
-            for (int i = 0; i < words.length; ++i) {
-                final String word = words[i];
-                lineLength += word.length();
-                if (wordCount > 0) {
-                    ++lineLength;
-                }
-                if (lineLength > length) {
-                    result.add(line.toString());
-                    line.delete(0, line.length()); // clear
-                    wordCount = 0;
-                    lineLength = 0;
-                    line.append(word);
-                    lineLength += word.length();
-                    ++wordCount;
-
-                } else {
-                    if (wordCount > 0) {
-                        line.append("-");
-                    }
-                    line.append(word);
-                    ++wordCount;
-                }
-                if (i == words.length - 1) {
-                    result.add(line.toString());
-                }
+    public static List<String> wrapLines(final String[] words, final int length) {
+        final List<String> result = new ArrayList<>();
+        int lineLength = 0;
+        final StringBuilder line = new StringBuilder();
+        int wordCount = 0;
+        for (int i = 0; i < words.length; ++i) {
+            final String word = words[i];
+            lineLength += word.length();
+            if (wordCount > 0) {
+                ++lineLength;
             }
-            return result;
+            if (lineLength > length) {
+                result.add(line.toString());
+                line.delete(0, line.length()); // clear
+                wordCount = 0;
+                lineLength = 0;
+                line.append(word);
+                lineLength += word.length();
+                ++wordCount;
+
+            } else {
+                if (wordCount > 0) {
+                    line.append("-");
+                }
+                line.append(word);
+                ++wordCount;
+            }
+            if (i == words.length - 1) {
+                result.add(line.toString());
+            }
         }
+        return result;
     }
 }
