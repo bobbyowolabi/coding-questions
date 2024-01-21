@@ -18,23 +18,25 @@ import org.junit.jupiter.api.Test;
 public class LongestSubstring {
 
     public int lengthOfLongestSubstring(final String s) {
-        int result = 0;
-        final Set<Character> dictionary = new HashSet<>();
-        for (int i = 0; i < s.length(); ++i) {
-            final char next = s.charAt(i);
-            final boolean seen = dictionary.contains(next);
-            final boolean repeat = i > 0 ? s.charAt(i) == s.charAt(i - 1) : false;
-            if (seen) {
-                result = Math.max(dictionary.size(), result);
-                dictionary.clear();
+        int maximum = 0;
+        final Set<Character> seen = new HashSet<>();
+        int start = 0, end = 0;
+//        for (int end = 0;) {
+//
+//        }
+        while(end < s.length()) {
+            final char c = s.charAt(end++);
+            if (seen.contains(c)) {
+                final int length = end - start;
+                maximum = Math.max(length, maximum);
+                ++start;
+                seen.remove(c); //
             } else {
-                dictionary.add(next);
+                seen.add(c);
             }
         }
-        result = Math.max(dictionary.size(), result);
-        return result;
+        return maximum;
     }
-
 
     private void test(final String s, final int expected) {
         final int actual = lengthOfLongestSubstring(s);
