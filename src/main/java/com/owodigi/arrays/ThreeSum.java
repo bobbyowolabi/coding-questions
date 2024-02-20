@@ -17,6 +17,15 @@ import org.junit.jupiter.api.Test;
  */
 public class ThreeSum {
 
+    public record Triplet(int num1, int num2, int num3){}
+
+
+
+
+    private boolean condition(final int i, final int j, final int k) {
+        return (i != j) &&  (i != k) && (j != k);
+    }
+
     private boolean condition(final int i, final int j, final Set<Integer> nums) {
         for (int k : nums) {
             if ((i != j) &&  (i != k) && (j != k)) {
@@ -29,6 +38,7 @@ public class ThreeSum {
     public List<List<Integer>> threeSum(int[] nums) {
         final List<List<Integer>> result = new ArrayList<>();
         final Map<Integer, Set<Integer>> numsToIndices = new HashMap<>();
+        final Set<Triplet> visited = new HashSet<>();
         for (int i = 0; i < nums.length; ++i) {
             final int num = nums[i];
             Set<Integer> indicies = numsToIndices.get(num);
@@ -39,13 +49,19 @@ public class ThreeSum {
             indicies.add(i);
         }
         for (int i = 0; i < nums.length; ++i) {
-            for (int j = i; j < nums.length; ++j) {
+            for (int j = i + 1; j < nums.length; ++j) {
                 final int num1 = nums[i];
                 final int num2 = nums[j];
                 final int num3 = Math.negateExact(num1 + num2);
-                final Set<Integer> num3Indicies = numsToIndices.get(num3);
-                if (num3Indicies != null && condition(i, j, num3Indicies)) {
-                    result.add(Arrays.asList(num1, num2, num3));
+                final Set<Integer> num3Indices = numsToIndices.get(num3);
+                if (num3Indices != null) {
+                    for (final int k : num3Indices) {
+                        final Triplet triplet = new Triplet(num1, num2, num3);
+                        if (condition(i, j, k) && !visited.contains(triplet)) {
+                            result.add(Arrays.asList(num1, num2, num3));
+                        }
+                        visited.add(triplet);
+                    }
                 }
             }
         }

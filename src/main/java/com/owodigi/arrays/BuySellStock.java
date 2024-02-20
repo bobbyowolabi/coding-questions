@@ -16,7 +16,18 @@ import org.junit.jupiter.api.Test;
  */
 public class BuySellStock {
 
-    public int maxProfit(final int[] prices) {
+    public int maxProfit1(int[] prices) {
+        int lowestPrice = prices[0], max = 0;
+        for (int i = 1; i < prices.length; ++i) {
+            final int price = prices[i];
+            lowestPrice = Math.min(lowestPrice, price);
+            final int profit = price - lowestPrice;
+            max = Math.max(max, profit);
+        }
+        return max;
+    }
+
+    public int maxProfit2(final int[] prices) {
         int maxProfit = 0;
         if (prices != null && prices.length < 2) {
             return maxProfit;
@@ -31,6 +42,11 @@ public class BuySellStock {
             }
         }
         return maxProfit;
+    }
+
+    public int maxProfit(final int[] prices) {
+        return maxProfit1(prices);
+//        return maxProfit2(prices);
     }
 
     @Test

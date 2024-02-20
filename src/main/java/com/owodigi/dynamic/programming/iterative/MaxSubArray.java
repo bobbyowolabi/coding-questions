@@ -21,16 +21,11 @@ public class MaxSubArray {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-        final int[] maxSums = new int[nums.length];
-        int max = Integer.MIN_VALUE;
-        max = Math.max(max, maxSums[0] = nums[0]);
+        int currentSum = nums[0], max = nums[0] ;
         for (int i = 1; i < nums.length; ++i) {
-            if (maxSums[i - 1] > 0) {
-                maxSums[i] = maxSums[i - 1] + nums[i];
-            } else {
-                maxSums[i] = nums[i];
-            }
-            max = Math.max(max, maxSums[i]);
+            final int num = nums[i];
+            currentSum = Math.max(num, num + currentSum);
+            max = Math.max(max, currentSum);
         }
         return max;
     }

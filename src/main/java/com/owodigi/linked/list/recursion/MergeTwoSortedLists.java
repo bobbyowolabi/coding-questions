@@ -1,9 +1,6 @@
 package com.owodigi.linked.list.recursion;
 
-import java.util.*;
-
 import com.owodigi.util.ListNode;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,28 +12,41 @@ import org.junit.jupiter.api.Test;
  */
 public class MergeTwoSortedLists {
 
-    private void merge(final ListNode list1, final ListNode list2, final ListNode merged) {
+    private ListNode min(final ListNode list1, final ListNode list2) {
         if (list1 != null && list2 != null) {
-            if (list1.val < list2.val) {
-                merged.next = new ListNode(list1.val);
-                merge(list1.next, list2, merged.next);
+            if (list1.val <= list2.val) {
+                return list1;
             } else {
-                merged.next = new ListNode(list2.val);
-                merge(list1, list2.next, merged.next);
+                return list2;
             }
-        } else if (list1 != null) {
-            merged.next = new ListNode(list1.val);
-            merge(list1.next, list2, merged.next);
-        } else if (list2 != null) {
-            merged.next = new ListNode(list2.val);
-            merge(list1, list2.next, merged.next);
+        } else if (list1 == null && list2 != null) {
+            return list2;
+        } else if (list1 != null && list2 == null) {
+            return list1;
+        } else {
+            return null;
+        }
+    }
+
+    private void merge(final ListNode tail, final ListNode list1, ListNode list2) {
+        final ListNode next = min(list1, list2);
+        if (next == null) {
+            return;
+        } else {
+            if (next == list1) {
+                tail.next = list1;
+                merge(tail.next, list1.next, list2);
+            } else {
+                tail.next = list2;
+                merge(tail.next, list1, list2.next);
+            }
         }
     }
 
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        final ListNode merged = new ListNode(-1);
-        merge(list1, list2, merged);
-        return merged.next;
+        final ListNode head = new ListNode(-1);
+        merge(head, list1, list2);
+        return head.next;
     }
 
     @Test
