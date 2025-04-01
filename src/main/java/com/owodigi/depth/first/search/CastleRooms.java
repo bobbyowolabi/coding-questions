@@ -2,7 +2,6 @@ package com.owodigi.depth.first.search;
 
 import java.io.*;
 import java.util.*;
-import javafx.util.Pair;
 
 /*
 You are with your friends in a castle, where there are multiple rooms named after flowers. Some of the rooms contain treasures - we call them the treasure rooms.
@@ -97,7 +96,7 @@ T: number of treasure rooms
 I: number of instructions given
 */
 
-public class Solution {
+public class CastleRooms {
 
     private static void populate(final String[][] instructions_1, final Map<String, String> roomMap, final Map<String, Set<String>> reverseLookupMap) {
         for (final String[] instruction : instructions_1) {
@@ -145,7 +144,7 @@ public class Solution {
         for (final String room : roomMap.keySet()) {
             visit(room, roomMap, reverseLookupMap, treasureRooms, visited, results);
         }
-        return result;
+        return results;
     }
 
     public static void main(String[] argv) {

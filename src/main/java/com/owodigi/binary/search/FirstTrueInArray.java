@@ -1,4 +1,4 @@
-package com.owodigi.binary.search.trees;
+package com.owodigi.binary.search;
 
 import java.util.*;
 
