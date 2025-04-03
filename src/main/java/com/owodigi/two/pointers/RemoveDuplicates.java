@@ -1,29 +1,52 @@
 package com.owodigi.two.pointers;
 
-import java.util.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-class RemoveDuplicates {
+import java.util.Arrays;
+import java.util.List;
 
-    public static int remove(final int[] arr) {
-        if (arr == null || arr.length == 1) {
-            return -1;
-        }
-        int availableIndex = 1;
-        for (int i = 1; i < arr.length; ++i) {
-            final int previous = arr[i - 1];
-            final int current = arr[i];
-            if (current != previous) {
-                arr[availableIndex++] = arr[i];
-            }
-        }
-        return availableIndex;
+public abstract class RemoveDuplicates {
+
+    public abstract int remove(final List<Integer> arr);
+
+    @Test
+    public void testCase1() {
+        final List<Integer> input = Arrays.asList(2, 3, 3, 3, 6, 9, 9);
+        final int expected = 4;
+        final int actual = remove(input);
+        Assertions.assertEquals(expected, actual, "New length of list post removal of duplicates");
     }
 
-    public static void main(String[] args) {
-        int[] arr = new int[]{2, 3, 3, 3, 6, 9, 9};
-        System.out.print("result: " + RemoveDuplicates.remove(arr) + " input: " + Arrays.toString(arr) + "\n");
+    @Test
+    public void testCase2() {
+        final List<Integer> input = Arrays.asList(2, 2, 2, 11);
+        final int expected = 2;
+        final int actual = remove(input);
+        Assertions.assertEquals(expected, actual, "New length of list post removal of duplicates");
+    }
 
-        arr = new int[]{2, 2, 2, 11};
-        System.out.print("result: " + RemoveDuplicates.remove(arr) + " input: " + Arrays.toString(arr) + "\n");
+    @Test
+    public void testCase3() {
+        final List<Integer> input = Arrays.asList(0, 0, 1, 1, 1, 2, 2);
+        final int expected = 3;
+        final int actual = remove(input);
+        Assertions.assertEquals(expected, actual, "New length of list post removal of duplicates");
+    }
+
+    @Test
+    public void testCase4() {
+        final List<Integer> input = Arrays.asList(1, 2, 3);
+        final int expected = 3;
+        final int actual = remove(input);
+        Assertions.assertEquals(expected, actual, "New length of list post removal of duplicates");
+    }
+
+    @Test
+    public void testCase5() {
+        final List<Integer> input = Arrays.asList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+        final int expected = 1;
+        final int actual = remove(input);
+        Assertions.assertEquals(expected, actual, "New length of list post removal of duplicates");
     }
 }
