@@ -1,7 +1,5 @@
 package com.owodigi.two.pointers;
 
-import java.util.*;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,43 +13,96 @@ import org.junit.jupiter.api.Test;
  * Input: s = "A man, a plan, a canal: Panama"
  * Output: true
  */
-public class Palindrome {
-    public boolean isPalindrome(final String s) {
-        final StringBuilder builder = new StringBuilder(s.toLowerCase());
-        for (int i = 0; i < builder.length(); ++i) {
-            if (!Character.isLetterOrDigit(builder.charAt(i))) {
-                builder.deleteCharAt(i);
-                --i;
-            }
-        }
-        int start = 0;
-        int end = builder.length() - 1;
-        while (start < end) {
-            if (builder.charAt(start++) != builder.charAt(end--)) {
-                return false;
-            }
-        }
-        return true;
-    }
+public abstract class Palindrome {
+    public abstract boolean isPalindrome(final String s);
 
     private void test(final String input, final boolean expected) {
         final boolean actual = isPalindrome(input);
-        Assertions.assertEquals(expected, actual, "Is Valid Palindrome");
-
+        Assertions.assertEquals(expected, actual, "Is '%s' a valid palindrome?".formatted(input));
     }
 
     @Test
-    public void testCase1() {
+    public void testCase0a() {
         test("A man, a plan, a canal: Panama", true);
     }
 
     @Test
-    public void testCase2() {
+    public void testCase0() {
         test("race a car", false);
     }
 
     @Test
-    public void testCase3() {
+    public void testCase1() {
         test(" ", true);
+    }
+
+    @Test
+    public void testCase2() {
+        test("racecar", true); // Simple palindrome
+    }
+
+    @Test
+    public void testCase3() {
+        test("hello", false); // Not a palindrome
+    }
+
+    @Test
+    public void testCase4() {
+        test("Was it a car or a cat I saw?", true); // Sentence with spaces and punctuation
+    }
+
+    @Test
+    public void testCase5() {
+        test("No 'x' in Nixon", true); // Palindrome with apostrophe
+    }
+
+    @Test
+    public void testCase6() {
+        test("12321", true); // Numeric palindrome
+    }
+
+    @Test
+    public void testCase7() {
+        test("12345", false); // Not a palindrome (numbers)
+    }
+
+    @Test
+    public void testCase8() {
+        test(" ", true); // Single space is a palindrome
+    }
+
+    @Test
+    public void testCase9() {
+        test("", true); // Empty string is a palindrome
+    }
+
+    @Test
+    public void testCase10() {
+        test("Able was I, I saw Elba!", true); // Complex case with punctuation and mixed casing
+    }
+
+    @Test
+    public void testCase11() {
+        test("Madam In Eden, I’m Adam", true); // Famous palindrome phrase
+    }
+
+    @Test
+    public void testCase12() {
+        test("Palindrome", false); // A completely non-palindromic word
+    }
+
+    @Test
+    public void testCase13() {
+        test("!!", true); // Special characters only
+    }
+
+    @Test
+    public void testCase14() {
+        test("12 21", true); // Numbers with spaces
+    }
+
+    @Test
+    public void testCase15() {
+        test("0P", false); // Edge case: Alphanumeric with mixed case
     }
 }
