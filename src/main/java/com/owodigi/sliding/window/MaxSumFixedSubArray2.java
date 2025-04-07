@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Given an array of positive numbers and a positive number ‘k,’ find the maximum sum of any contiguous subarray of size ‘k’.
  */
-class MaxSumSubArrayOfSizeK {
+class MaxSumFixedSubArray2 extends MaxSumFixedSubArray {
     public static int findMaxSumSubArray(int k, int[] arr) {
         int max = 0;
         int sum = 0;
@@ -19,12 +19,9 @@ class MaxSumSubArrayOfSizeK {
         return max;
     }
 
-    public static void main(String[] args) {
-        // Expected: 9
-        System.out.println("Maximum sum of a subarray of size K: "
-                + MaxSumSubArrayOfSizeK.findMaxSumSubArray(3, new int[]{2, 1, 5, 1, 3, 2}));
-        // Expected: 7
-        System.out.println("Maximum sum of a subarray of size K: "
-                + MaxSumSubArrayOfSizeK.findMaxSumSubArray(2, new int[]{2, 3, 4, 1, 5}));
+    @Override
+    public int subarraySumFixed(final List<Integer> nums, final int k) {
+        int[] arr = nums.stream().mapToInt(Integer::intValue).toArray();
+        return findMaxSumSubArray(k, arr);
     }
 }
