@@ -1,13 +1,13 @@
 package com.owodigi.util;
 
 public class Node {
-    public int data;
+    public int value;
     public Node left;
     public Node right;
 
-    public Node(int d) {
-        data = d;
-        left = null;
-        right = null;
+    public Node(final int value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
     }
 }

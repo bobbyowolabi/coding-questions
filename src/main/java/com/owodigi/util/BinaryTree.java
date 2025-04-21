@@ -29,13 +29,13 @@ class BinaryTree{
             Node tempNode = this.root;
             while (tempNode != null) {
                 parent = tempNode;
-                if (nodeData <= tempNode.data) {
+                if (nodeData <= tempNode.value) {
                     tempNode = tempNode.left;
                 } else {
                     tempNode = tempNode.right;
                 }
             }
-            if (nodeData <= parent.data) {
+            if (nodeData <= parent.value) {
                 parent.left = newNode;
             } else {
                 parent.right = newNode;
@@ -46,9 +46,9 @@ class BinaryTree{
         if (node == null)
             return null;
 
-        if (node.data == nodeData) {
+        if (node.value == nodeData) {
             return node;
-        } else if (node.data > nodeData) {
+        } else if (node.value > nodeData) {
             return findInBSTRec(node.left, nodeData);
         } else {
             return findInBSTRec(node.right, nodeData);
@@ -66,7 +66,7 @@ class BinaryTree{
     }
     private Node getTreeDeepCopyRec(Node node) {
         if (node != null) {
-            Node newNode = new Node(node.data);
+            Node newNode = new Node(node.value);
             newNode.left = getTreeDeepCopyRec(node.left);
             newNode.right = getTreeDeepCopyRec(node.right);
             return newNode;

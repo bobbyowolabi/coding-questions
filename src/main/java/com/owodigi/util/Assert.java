@@ -28,7 +28,7 @@ public class Assert {
         } else {
             Assertions.assertNotNull(actual, toString(stack));
         }
-        Assertions.assertEquals(expected.data, actual.data, toString(stack) + ": data");
+        Assertions.assertEquals(expected.value, actual.value, toString(stack) + ": data");
         assertEquals(expected.left, actual.left, push("left", stack));
         stack.pop();
         assertEquals(expected.right, actual.right, push("right", stack));
