@@ -27,12 +27,12 @@ import org.junit.jupiter.api.Test;
  */
 public class BankAccountAPI {
 
-    interface Bank {
-        public int credit(long accountId, int timestamp, int amount);
-        public int debit(long accountId, int timestamp, int amount);
-        public int balance(long accountId);
-        public int balanceChange(long accountId, start, end)
-    }
+//    interface Bank {
+//        public int credit(long accountId, int timestamp, int amount);
+//        public int debit(long accountId, int timestamp, int amount);
+//        public int balance(long accountId);
+//        public int balanceChange(long accountId, start, end)
+//    }
 
     @Test
     public void testCase1() {

@@ -1,6 +1,6 @@
 package com.owodigi.linked.list;
 
-import com.owodigi.util.generic.Node;
+import com.owodigi.util.generic.list.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

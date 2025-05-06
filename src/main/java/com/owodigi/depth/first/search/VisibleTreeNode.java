@@ -2,6 +2,7 @@ package com.owodigi.depth.first.search;
 
 import java.util.*;
 
+import com.owodigi.util.tree.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

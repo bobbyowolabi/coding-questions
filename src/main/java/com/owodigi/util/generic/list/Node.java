@@ -1,4 +1,4 @@
-package com.owodigi.util.generic;
+package com.owodigi.util.generic.list;
 
 import java.util.Arrays;
 import java.util.Iterator;
